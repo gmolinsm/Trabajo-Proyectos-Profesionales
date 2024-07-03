@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>{{ fecha }}</h2>
+  {% if prediction_str %}
+    <p>Prediction: {{ prediction_str }}</p>
+    <a href="{{ url_for('home') }}" class="btn btn-primary">Home</a>
+    <a href="{{ url_for('predict') }}" class="btn btn-secondary">Back</a>
+  {% else %}
+    <form method="post">
+      {% for param in params %}
+        <div class="form-group">
+          <label for="{{ param }}">{{ param }}:</label>
+          <input type="text" class="form-control" id="{{ param }}" name="{{ param }}">
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Predict</button>
+      <a href="{{ url_for('home') }}" class="btn btn-secondary">Back</a>
+    </form>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+body {
+    padding-top: 5%;
+    align-items: center;
+}
+
+.buttons {
+    width: 200px;
+    margin: auto;
+    display: inline;
+}

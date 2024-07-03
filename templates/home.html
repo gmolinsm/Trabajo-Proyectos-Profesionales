@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Welcome to the weather prediction model</h1>
+  <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+  
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+      // Get the graph JSON from the server
+      var test = {{ graphJSON | tojson | safe }};
+      var fig = JSON.parse(test);
+      // Render the Plotly graph
+      Plotly.newPlot('graph', fig.data, fig.layout);
+    });
+  </script>
+
+  <div id="graph"></div>
+
+  {% if is_logged %}
+    <div class="buttons">
+      <a href="{{ url_for('predict') }}" class="btn btn-primary">Predict</a>
+      <form method="post" class="buttons">
+        <button type="submit" class="btn btn-secondary">Logout</button>
+      </form>
+    </div>
+    
+  {% else %}
+    <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+    <a href="{{ url_for('register') }}" class="btn btn-secondary">Register</a>
+  {% endif %}
+{% endblock %}
